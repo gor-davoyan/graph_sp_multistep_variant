@@ -1,0 +1,3 @@
+/Users/gor/Desktop/graph_sp_multistep_variant/build/CMakeFiles/GraphSpMultstep.dir
+/Users/gor/Desktop/graph_sp_multistep_variant/build/CMakeFiles/edit_cache.dir
+/Users/gor/Desktop/graph_sp_multistep_variant/build/CMakeFiles/rebuild_cache.dir

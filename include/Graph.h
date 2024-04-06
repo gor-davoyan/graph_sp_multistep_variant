@@ -8,7 +8,7 @@ private:
     std::vector<std::vector<int>> distances;
 public:
     Graph() {}
-    Graph(int n): distances(n, std::vector<int>(n, -1)) {
+    Graph(int n): distances(n, std::vector<int>(n, 100000)) {
         for (int i = 0; i < n; ++i) {
             distances[i][i] = 0;
         }

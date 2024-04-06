@@ -6,20 +6,20 @@
 
 class Permutation {
 private:
-    std::vector<std::vector<int>> getPermutations(std::vector<int> perm) {
-        std::vector<std::vector<int>> permutations;
+    std::vector<std::vector<int>> getPermutations(std::vector<int>& perm) {
+    std::vector<std::vector<int>> permutations;
+    std::sort(perm.begin(), perm.end());
+    do {
         permutations.push_back(perm);
-        while (std::next_permutation(perm.begin(), perm.end())) {
-            permutations.push_back(perm);
-        }
-        return permutations;
-    }
+    } while (std::next_permutation(perm.begin(), perm.end()));
+    return permutations;
+}
 
 public:
 
     std::vector<int> findBestPermutation(
-        std::vector<int> perm,
-        FloydWarshall floydWarshall,
+        std::vector<int>& perm,
+        FloydWarshall& floydWarshall,
         int startingIntersection
     ) {
         std::vector<std::vector<int>> permutations = getPermutations(perm);
@@ -31,7 +31,6 @@ public:
             int currentIntersecttion = startingIntersection;
 
             for (int dest: perm) {
-                std::cout << dest;
                 distance += floydWarshall.getShortestDistance(currentIntersecttion, dest);
                 currentIntersecttion = dest;
             }

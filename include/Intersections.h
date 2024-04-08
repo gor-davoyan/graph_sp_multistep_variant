@@ -12,16 +12,16 @@ private:
 public:
     Intersections(int n): nameToIndex(n), indexToName(n) {}
 
-    void addName(const std::string& name, int index) {
+    void addIntersection(const std::string& name, int index) {
         nameToIndex[name] = index;
         indexToName[index] = name;
     }
 
-    int getIndex(const std::string& name) {
+    int getIntersectionIndex(const std::string& name) {
         return nameToIndex[name];
     }
 
-    std::string getName(int index) {
+    std::string getIntersectionName(int index) {
         return indexToName[index];
     }
 };

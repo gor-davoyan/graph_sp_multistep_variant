@@ -5,73 +5,46 @@
 #include <FloydWarshall.h>
 #include <Permutation.h>
 #include <vector>
+#include <Test.h>
+
+void test1() {
+    int n = 5, m = 10;
+    std::vector<std::string> intrs = {"A", "B", "C", "D", "E"};
+    std::vector<std::string> info = {"A B 4", "A D 5", "B C 1", "B E 6", "C D 3", "C A 2", "D C 1", "D E 2", "E D 4", "E A 1"};
+    std::vector<std::string> destsToVisit = {"A", "D"};
+    int startingIntersection = 1;
+    int destCOuntToVisit = 2;
+    test(
+        n, m,
+        intrs,
+        info,
+        startingIntersection,
+        destCOuntToVisit,
+        destsToVisit
+    );
+}
+
+void test2() {
+    int n = 5, m = 10;
+    std::vector<std::string> intrs = {"A", "B", "C", "D"};
+    std::vector<std::string> info = {"A B 3", "B C 5", "C D 7", "D A 1"};
+    std::vector<std::string> destsToVisit = {"D", "B"};
+    int startingIntersection = 0;
+    int destCOuntToVisit = 2;
+    test(
+        n, m,
+        intrs,
+        info,
+        startingIntersection,
+        destCOuntToVisit,
+        destsToVisit
+    );
+}
 
 int main() {
-    int n, m;
-    std::cout << "Enter number of intersections(n) and roads(m)" << std::endl;
-    std::cin >> n >> m;
 
-    Intersections names(n);
-    Graph graph(n);
+    // test1();
+    test2();
 
-    for (int i = 0; i < n; i++) {
-        std::cout << "Enter " << i + 1 <<  " intersection name" << std::endl;
-        std::string name;
-        std::cin >> name;
-        names.addName(name, i);
-    }
-
-    std::cout << "Enter description between roads" << std::endl;    
-    for (int i = 0; i < m; i++) {
-        std::string start, end;
-        int lenght;
-
-        std::cin >> start >> end >> lenght;
-
-        int startIndex = names.getIndex(start);
-        int endIndex = names.getIndex(end);
-
-        graph.addEdge(startIndex, endIndex, lenght);
-    }
-
-    int startingIntersection;
-    std::cout << "Enter starting intersection index" << std::endl;
-    std::cin >> startingIntersection;
-
-    int destCountToVisit;
-    std::cout << "Enter count of destinations to visit" << std::endl;
-    std::cin >> destCountToVisit;
-
-    std::vector<int> destsToVisit(destCountToVisit);
-    for (int i = 0; i < destCountToVisit; i++) {
-        std::cout << "Enter " << i <<  " destination name to visit" << std::endl;
-        std::string destName;
-        std::cin >> destName;
-        destsToVisit[i] = names.getIndex(destName); 
-    }
-
-    FloydWarshall floydWarshall(graph);
-    Permutation permutation;
-
-    std::vector<int> bestPermutation = permutation.findBestPermutation(destsToVisit, floydWarshall, startingIntersection);
-
-    std::cout << "Best order of destinations" << std::endl;
-    for (int dest: bestPermutation) {
-        std::cout << names.getName(dest) << " ";
-    }
-    std::cout << std::endl;
-
-    int currentIntersection = startingIntersection;
-    int distanceSum = 0;
-    std::cout << "Length of trips" << std::endl;
-    for (int dest: bestPermutation) {
-        int distance = floydWarshall.getShortestDistance(currentIntersection, dest);
-        std::cout << "From " << names.getName(currentIntersection) << " to " << names.getName(dest) << " = " << distance << std::endl;
-        distanceSum += distance;
-        currentIntersection = dest;
-    }
-    int distance = floydWarshall.getShortestDistance(currentIntersection, startingIntersection);
-    std::cout << "From " << names.getName(currentIntersection) << " to " << names.getName(startingIntersection) << " = " << distance << std::endl;
-    distanceSum += distance;
-    std::cout << "Length of travel = " << distanceSum;
+    // dynamicTest();
 }

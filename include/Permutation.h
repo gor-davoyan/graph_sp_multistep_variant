@@ -7,13 +7,13 @@
 class Permutation {
 private:
     std::vector<std::vector<int>> getPermutations(std::vector<int>& perm) {
-    std::vector<std::vector<int>> permutations;
-    std::sort(perm.begin(), perm.end());
-    do {
-        permutations.push_back(perm);
-    } while (std::next_permutation(perm.begin(), perm.end()));
-    return permutations;
-}
+        std::vector<std::vector<int>> permutations;
+        std::sort(perm.begin(), perm.end());
+        do {
+            permutations.push_back(perm);
+        } while (std::next_permutation(perm.begin(), perm.end()));
+        return permutations;
+    }
 
 public:
 
@@ -34,7 +34,6 @@ public:
                 distance += floydWarshall.getShortestDistance(currentIntersecttion, dest);
                 currentIntersecttion = dest;
             }
-            std::cout << std::endl;
             distance += floydWarshall.getShortestDistance(currentIntersecttion, startingIntersection);
 
             if (distance < minDistance) {

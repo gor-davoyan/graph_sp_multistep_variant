@@ -41,10 +41,28 @@ void test2() {
     );
 }
 
+void test3() {
+    int n = 5, m = 10;
+    std::vector<std::string> intrs = {"A", "B", "C", "D", "E"};
+    std::vector<std::string> info = {"A B 4", "A D 5", "B C 1", "B E 6", "C D 3", "C A 2", "D C 1", "D E 2", "E D 4", "E A 1"};
+    std::vector<std::string> destsToVisit = {"C", "B", "D"};
+    int startingIntersection = 4;
+    int destCOuntToVisit = 2;
+    test(
+        n, m,
+        intrs,
+        info,
+        startingIntersection,
+        destCOuntToVisit,
+        destsToVisit
+    );
+}
+
 int main() {
 
     // test1();
-    test2();
+    // test2();
+    test3();
 
     // dynamicTest();
 }

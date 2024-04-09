@@ -25,7 +25,7 @@ void test1() {
 }
 
 void test2() {
-    int n = 5, m = 10;
+    int n = 4, m = 4;
     std::vector<std::string> intrs = {"A", "B", "C", "D"};
     std::vector<std::string> info = {"A B 3", "B C 5", "C D 7", "D A 1"};
     std::vector<std::string> destsToVisit = {"D", "B"};

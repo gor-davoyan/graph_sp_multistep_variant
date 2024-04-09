@@ -10,6 +10,23 @@
 #include <vector>
 #include <sstream>
 
+void printMidPoints(
+    FloydWarshall floydWarshall,
+    int start,
+    int end
+) {
+    std::vector<int> midPoints = floydWarshall.getMidElements(start, end);
+    for (int i = 0; i < midPoints.size(); i++) {
+        std::cout << midPoints[i];
+        if (i != midPoints.size() - 1){
+            std::cout << " -> ";   
+        } else {
+            std::cout << ")";
+        }
+            
+    }
+}
+
 void test(
     int n,
     int m, 
@@ -60,12 +77,20 @@ void test(
 
     int currentIntersection = startingIntersection;
     int distanceSum = 0;
+    std::vector<std::vector<int>> distances = graph.getDistances();
     std::cout << "Length of trips" << std::endl;
     for (int dest: bestPermutation) {
         int distance = floydWarshall.getShortestDistance(currentIntersection, dest);
         std::string startIntersection = intersections.getIntersectionName(currentIntersection);
         std::string endIntersection = intersections.getIntersectionName(dest);
-        std::cout << "From " << startIntersection << " to " << endIntersection << " = " << distance << std::endl;
+        std::cout << "From " << startIntersection << " to " << endIntersection << " = " << distance;
+
+        if (distances[currentIntersection][dest] != distance) {
+            std::cout << " (";
+            printMidPoints(floydWarshall, currentIntersection, dest);
+        }
+        std::cout << std::endl;
+
         distanceSum += distance;
         currentIntersection = dest;
     }
@@ -134,10 +159,18 @@ void dynamicTest() {
 
     int currentIntersection = startingIntersection;
     int distanceSum = 0;
+    std::vector<std::vector<int>> distances = graph.getDistances();
     std::cout << "Length of trips" << std::endl;
     for (int dest: bestPermutation) {
         int distance = floydWarshall.getShortestDistance(currentIntersection, dest);
-        std::cout << "From " << names.getIntersectionName(currentIntersection) << " to " << names.getIntersectionName(dest) << " = " << distance << std::endl;
+        std::cout << "From " << names.getIntersectionName(currentIntersection) << " to " << names.getIntersectionName(dest) << " = " << distance;
+        
+        if (distances[currentIntersection][dest] != distance) {
+            std::cout << " (";
+            printMidPoints(floydWarshall, currentIntersection, dest);
+        }
+        std::cout << std::endl;
+
         distanceSum += distance;
         currentIntersection = dest;
     }

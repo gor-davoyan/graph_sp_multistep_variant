@@ -7,8 +7,9 @@ class Graph {
 private:
     std::vector<std::vector<int>> distances;
 public:
+    const static int MAX_VALUE;
     Graph() {}
-    Graph(int n): distances(n, std::vector<int>(n, 100000)) {
+    Graph(int n): distances(n, std::vector<int>(n, MAX_VALUE)) {
         for (int i = 0; i < n; ++i) {
             distances[i][i] = 0;
         }
@@ -23,5 +24,6 @@ public:
     }
 };
 
+const int Graph::MAX_VALUE = 100000;
 
 #endif // GRAPH
